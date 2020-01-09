@@ -9,7 +9,7 @@ geoCode.getGeocode(searchStr, (error, latLong) => {
     console.log(latLong);
     if (error) {
         console.log(error);
-        
+
     }
     else {
         const url = 'https://api.darksky.net/forecast/1e61e491e4f83e3ce5b0389d67ee1293/' + latLong.latitude + ',' + latLong.longitude + '';
@@ -36,4 +36,8 @@ geoCode.getGeocode(searchStr, (error, latLong) => {
 });
 
 
+geoCode.forecast(-75.7088, 44.1545, (error, data) => {
+    console.log('Error', error)
+    console.log('Data', data)
+})
 
