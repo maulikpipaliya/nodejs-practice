@@ -4,18 +4,18 @@ const request = require('request');
 const getGeocode = (address, callback) => {
     
     // console.log(address);
-    const urlFwdGeocoding = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(address) + ".json?access_token=pk.eyJ1IjoibWF1bGlrcGlwYWxpeWEiLCJhIjoiY2s1M3RudHNkMGJjYTNvcG1ka2Vhc3FvbCJ9.19Z9XqkbW161j-m9zd-Tkg"
+    const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(address) + ".json?access_token=pk.eyJ1IjoibWF1bGlrcGlwYWxpeWEiLCJhIjoiY2s1M3RudHNkMGJjYTNvcG1ka2Vhc3FvbCJ9.19Z9XqkbW161j-m9zd-Tkg"
     // console.log(urlFwdGeocoding)
-    request({ url: urlFwdGeocoding, json: true }, (error, response) => {
+    request({ url, json: true }, (error, {body}) => {
         if (error) {
             callback("Error found", undefined);
         }
-        else if (response.body.features.length == 0) {
+        else if (body.features.length == 0) {
             callback("Location couldn't be found", undefined)
         }
         else {
             // console.log(response.body);
-            const data = response.body;
+            const data = body;
             const location = data.features[0].place_name;
             const lat = data.features[0].geometry.coordinates[1];
             const long = data.features[0].geometry.coordinates[0];
@@ -50,16 +50,16 @@ const forecast = (lat, long, callback) => {
     // console.log(lat, long);
     const url = 'https://api.darksky.net/forecast/1e61e491e4f83e3ce5b0389d67ee1293/' + lat + ',' + long + '';
     // console.log(url);
-    request({ url: url, json: true }, (error, response) => {
+    request({ url, json: true }, (error, { body }) => { // const {body} = response
         // console.log(response.body.currently);
         if (error) {
             callback("Low level error", undefined);
-        } else if (response.body.error) {
+        } else if (body.error) {
             callback("Coordinate error", undefined);
         }
         else { // Success, pass forecast string for data (same format as from before)
-            const data = response.body;
-            const currentData = response.body.currently;
+            const data = body;
+            const currentData = body.currently;
             
             // console.log(data.daily.summary);
             callback(undefined, {

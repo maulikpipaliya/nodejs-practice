@@ -12,21 +12,23 @@ else {
     const input = process.argv[2];
     
     // Function: (input = Address) -> Geocode ->  Temperature
-    geoCode.getGeocode(input, (error, latLong) => {
+    geoCode.getGeocode(input, (error, {latitude, longitude, location}) => {
 
-        console.log(latLong);
+        // console.log(latLong);
+        // const {latitude, longitude, location} = latLong; // applied object destructuting
+
         if (error) {
             console.log(error);
         }
         else {
-            geoCode.forecast(latLong.latitude, latLong.longitude, (error, data) => {
+            geoCode.forecast(latitude, longitude, (error, data) => {
                 if (error) {
                     console.log(error);
                 }
                 else {
                     console.log('\n Geocode to temp = \n', data, '\n')
                 }
-                console.log(latLong.location)
+                console.log(location)
             })
         }
     });
