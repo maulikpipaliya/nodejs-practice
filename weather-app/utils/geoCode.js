@@ -1,6 +1,8 @@
 const request = require('request');
 
+// Address to Geocode
 const getGeocode = (address, callback) => {
+    
     // console.log(address);
     const urlFwdGeocoding = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(address) + ".json?access_token=pk.eyJ1IjoibWF1bGlrcGlwYWxpeWEiLCJhIjoiY2s1M3RudHNkMGJjYTNvcG1ka2Vhc3FvbCJ9.19Z9XqkbW161j-m9zd-Tkg"
     // console.log(urlFwdGeocoding)
@@ -20,7 +22,7 @@ const getGeocode = (address, callback) => {
             // console.log("Lat" + lat)
             // console.log("Long" + long)
             const latLong = {
-                query: location,
+                location: location,
                 latitude: lat,
                 longitude: long
             }
@@ -42,11 +44,12 @@ const getGeocode = (address, callback) => {
 
 
 
+// Geocode to temperature
 const forecast = (lat, long, callback) => {
-    console.log("forecast is called");
-    console.log(lat, long);
+    
+    // console.log(lat, long);
     const url = 'https://api.darksky.net/forecast/1e61e491e4f83e3ce5b0389d67ee1293/' + lat + ',' + long + '';
-    console.log(url);
+    // console.log(url);
     request({ url: url, json: true }, (error, response) => {
         // console.log(response.body.currently);
         if (error) {
@@ -57,9 +60,8 @@ const forecast = (lat, long, callback) => {
         else { // Success, pass forecast string for data (same format as from before)
             const data = response.body;
             const currentData = response.body.currently;
-            console.log("Temperature   :" + currentData.temperature);
-            console.log("Chance of rain:" + currentData.precipProbability);
-            console.log(data.daily.summary);
+            
+            // console.log(data.daily.summary);
             callback(undefined, {
                 temperature: currentData.temperature,
                 precipProbability: currentData.precipProbability,

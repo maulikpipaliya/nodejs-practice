@@ -4,40 +4,30 @@ const request = require('request');
 const geoCode = require('./utils/geoCode');
 
 
-const searchStr = "Delhi, India"
-geoCode.getGeocode(searchStr, (error, latLong) => {
-    console.log(latLong);
-    if (error) {
-        console.log(error);
 
-    }
-    else {
-        const url = 'https://api.darksky.net/forecast/1e61e491e4f83e3ce5b0389d67ee1293/' + latLong.latitude + ',' + latLong.longitude + '';
-        // console.log(url);
-        request({ url: url, json: true }, (error, response) => {
-            // console.log(response.body.currently);
-            if (error) {
-                console.log("ERR-002: Some error occured meanwhile")
-            } else if (response.body.error) {
-                console.log("ERR-004: response.body.error is undefined")
-            }
-            else {
-                const data = response.body;
-                const currentData = response.body.currently;
-                console.log("Temperature   :" + currentData.temperature);
-                console.log("Chance of rain:" + currentData.precipProbability);
-                console.log(data.daily.summary);
-            }
+if (!process.argv[2]) {
+    console.log('Please provide a single argument which should be location')
+}
+else {
+    const input = process.argv[2];
+    
+    // Function: (input = Address) -> Geocode ->  Temperature
+    geoCode.getGeocode(input, (error, latLong) => {
 
-        })
-
-    }
-
-});
-
-
-geoCode.forecast(-75.7088, 44.1545, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
-
+        console.log(latLong);
+        if (error) {
+            console.log(error);
+        }
+        else {
+            geoCode.forecast(latLong.latitude, latLong.longitude, (error, data) => {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log('\n Geocode to temp = \n', data, '\n')
+                }
+                console.log(latLong.location)
+            })
+        }
+    });
+}
