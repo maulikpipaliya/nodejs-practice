@@ -1,11 +1,11 @@
 //Goal = Address -> Temperature
 //Impl = Address -> Geocode -> Temperature  
 const request = require('request');
-const getGeocode = require('./utils/geoCode');
+const geoCode = require('./utils/geoCode');
 
 
 const searchStr = "Delhi, India"
-getGeocode(searchStr, (error, latLong) => {
+geoCode.getGeocode(searchStr, (error, latLong) => {
     console.log(latLong);
     if (error) {
         console.log(error);

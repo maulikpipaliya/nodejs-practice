@@ -29,4 +29,8 @@ const getGeocode = (address, callback) => {
     });
 };
 
-module.exports = getGeocode;
+
+const geoCode = {
+    getGeocode : getGeocode
+}
+module.exports = geoCode;
