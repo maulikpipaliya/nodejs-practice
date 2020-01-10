@@ -8,19 +8,28 @@ console.log(__dirname);
 const publicDirPath = path.join(__dirname,'../public')
 console.log(publicDirPath);
 
+app.set('view engine', 'hbs')
 app.use(express.static(publicDirPath)); // comes from static file.
 
-// app.get('',(request, response)=>{
-//     console.log(request);
-//     response.send('Hello Joyy! It\'s cool');
-// });
+ app.get('',(request, response)=>{
+    response.render('index', {
+        pageTitle: 'Home',
+        name: 'Maulik Pipaliya'
+    })
+});
 
-// app.get('/help', (request, response) => {
-//     response.send('<h1>Help page</h1>')
-// })
+app.get('/help', (request, response) => {
+    response.render('help',{
+        pageTitle: 'Help',
+        content: 'This is help content. This goes on ...'
+    })
+})
 
 app.get('/about', (request, response) => {
-    response.send('<h3> About page </h3> ')
+    response.render('about',{
+        pageTitle: 'About',
+        name : 'Joyy'
+    })
 })
 
 app.get('/weather', (request, response) => {
