@@ -36,7 +36,7 @@ app.get('/help', (request, response) => {
 app.get('/about', (request, response) => {
     response.render('about',{
         pageTitle: 'About',
-        name : 'Balraj'
+        name : 'Joyy'
     })
 })
 
@@ -54,7 +54,7 @@ app.get('/weather', (request, response) => {
 app.get('/help/*', (request, response) => {
     response.render('404',{
         errorText: 'Help article not found',
-        name: 'Joyy'
+        name: 'Balraj'
     });
 })
 
