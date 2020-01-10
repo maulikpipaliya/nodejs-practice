@@ -1,34 +1,42 @@
 const express = require('express');
 const path = require('path')
+const hbs = require('hbs')
 
 const app = express();
 const port = 3000;
 
 console.log(__dirname);
 const publicDirPath = path.join(__dirname,'../public')
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 console.log(publicDirPath);
 
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs');
+app.set('views',viewsPath);
+
+hbs.registerPartials(partialsPath);
+
 app.use(express.static(publicDirPath)); // comes from static file.
 
  app.get('',(request, response)=>{
     response.render('index', {
         pageTitle: 'Home',
-        name: 'Maulik Pipaliya'
+        name: 'Joyy'
     })
 });
 
 app.get('/help', (request, response) => {
     response.render('help',{
         pageTitle: 'Help',
-        content: 'This is help content. This goes on ...'
+        content: 'This is help content. This goes on ...',
+        name: 'Dvs'
     })
 })
 
 app.get('/about', (request, response) => {
     response.render('about',{
         pageTitle: 'About',
-        name : 'Joyy'
+        name : 'Balraj'
     })
 })
 
