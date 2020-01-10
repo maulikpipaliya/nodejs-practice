@@ -51,6 +51,21 @@ app.get('/weather', (request, response) => {
 })
 
 
+app.get('/help/*', (request, response) => {
+    response.render('404',{
+        errorText: 'Help article not found',
+        name: 'Joyy'
+    });
+})
+
+
+app.get('*', (request, response) => {
+    response.render('404',{
+        errorText: 'Page not found',
+        name: 'Joyy'
+    });
+})
+
 app.listen(port, () => {
     console.log("Server is up on " + port );
 })
