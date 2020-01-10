@@ -9,15 +9,21 @@ app.get('',(request, response)=>{
 });
 
 app.get('/help', (request, response) => {
-    response.send('Help page')
+    response.send('<h1>Help page</h1>')
 })
 
 app.get('/about', (request, response) => {
-    response.send('About page')
+    response.send('<h3> About page </h3> ')
 })
 
 app.get('/weather', (request, response) => {
-    response.send('Weather page')
+    response.send({
+        location: "Surat, India",
+        latitute: 21.17,
+        longitude: 72.83
+    })
+
+
 })
 
 
