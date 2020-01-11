@@ -41,14 +41,31 @@ app.get('/about', (request, response) => {
 })
 
 app.get('/weather', (request, response) => {
-    response.send({
-        location: "Surat, India",
-        latitute: 21.17,
-        longitude: 72.83
+    const address = request.query.address;
+    if(address){
+        return response.send({
+            location: address,
+            latitute: 21.17,
+            longitude: 72.83
+        })
+    }
+    return response.send({
+        errorText: 'Address in query string must be provided'
     })
-
-
 })
+
+app.get('/products', (request,response) => {
+
+    if(!request.query.search){
+        return response.send({
+            errorText: 'Search item not provided'
+        })
+    }
+    console.log(request.query); //{ search: 'games', rating: '5' }
+    response.send({
+        name: 'Joyy'
+    })
+});
 
 
 app.get('/help/*', (request, response) => {
