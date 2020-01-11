@@ -49,14 +49,14 @@ app.get('/weather', (request, response) => {
 
     if (address) {
 
-        console.log(geoCode.getGeocode(address, (error, {location,latitude,longitude}) => {
+        console.log(geoCode.getGeocode(address, (error, {location,latitude,longitude} = {}) => {
             if (error) {
                 return response.send({error})
             }
             else {
                 // console.log(data);
 
-                geoCode.forecast(latitude, longitude, (error, { temperature, precipProbability, summary}) => {
+                geoCode.forecast(latitude, longitude, (error, { temperature, precipProbability, summary }) => {
                     // console.log(forecastData);
                     return response.send({
                         location,
