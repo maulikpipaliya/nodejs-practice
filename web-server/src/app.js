@@ -6,7 +6,7 @@ const geoCode = require('./utils/geoCode')
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 console.log(__dirname);
 const publicDirPath = path.join(__dirname, '../public')
