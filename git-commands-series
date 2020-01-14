@@ -1,4 +1,4 @@
-git add * 
+git add .
 git status
 git commit -m "S8-57 Added HTTP Requests with Fetch"
 git push -u origin master
