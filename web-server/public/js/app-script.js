@@ -29,7 +29,7 @@ weatherForm.addEventListener('submit', (e) => {
             }
             else {
                 console.log(data);
-                msg1.textContent = 'For location: ' + data.location + ', temperature is ' + data.temperature + '. ';
+                msg1.textContent = 'For location: ' + data.location + ', temperature is ' + data.temperature + 'Fahrenheit. ';
                 msg2.textContent += data.summary;
             }
         })

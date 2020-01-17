@@ -38,3 +38,24 @@ sum(1,3,(ans)=>{
     console.log(ans);
     // console.log('subtraction : ' + s);
 })
+
+
+const doWorkCallback = (callback) => {
+    setTimeout(() => {
+        callback('Printed after 1 second', undefined)
+    }, 1000);
+
+    callback(undefined, 'Success')
+
+}
+
+
+doWorkCallback( (error, result) => {
+    console.log('function is called');
+    if(error){
+        return console.log(error);
+    }
+    else{
+        return console.log(result);
+    }
+});
